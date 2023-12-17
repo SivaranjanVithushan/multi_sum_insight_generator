@@ -1,0 +1,226 @@
+.reg_container{
+    background-color: #1E203E;
+    display: flex;
+    height: 100vh;
+    margin-top: 0;
+    font-family: Poppins;
+    width: 1280px;
+}
+
+.left_reg-container{
+    background-color: #232766;
+    width: 600px;
+    height: 600px;
+    margin-left: 50px;
+    border: 1px solid #232766;
+    border-radius: 50px 0px 0px 50px;
+}
+
+.right_reg-container{
+    background-color: #FFFFFF;
+    width: 600px;
+    height: 600px;
+    margin-right: 50px;
+    border: 1px solid #FFFFFF;
+    border-radius: 0px 50px 50px 0px;
+}
+
+.sign_logo_btn{
+    width: 120px;
+    height: 30px;
+    margin-top: 50px;
+    margin-left: 70px;
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+.welcome{
+    margin-top: 170px;
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.welcome_para{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color: #FFFFFF;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.signin_btn{
+    width: 400px;
+    height: 50px;
+    border: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+    padding: 14px 28px 14px 28px;
+    border-radius: 5px;
+    margin-left: 90px;
+    margin-top: 40px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+a{
+    text-decoration: none;
+}
+
+.create_account{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.register_container{
+    margin-left: 140px;
+    width: fit-content;
+    height: auto;
+}
+
+.username_content , .email_content , .password_content , .cpassword_content{
+    margin: 10px;
+}
+.icon_container{
+    display: flex;
+}
+
+ .email_container , .password_container , .cpassword_container{
+    width: 300px;
+    margin-top: 5px;
+    height: 20px;
+    border: 1px solid gray;
+    padding-left: 8px;
+}
+
+.username_container {
+    width: 333px;
+    margin-top: 5px;
+    height: 20px;
+    border: 1px solid gray;
+    padding-left: 8px;
+}
+
+.envelope-icon , .lock-icon{
+    margin-top: 4px;
+    padding: 5px;
+    border: 1px solid gray;
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+}
+
+.eye-icons{
+    position: absolute;
+    padding-left: 310px;
+    padding-top: 9px;
+    width: 15px;
+}
+
+.reg_btn{
+    width: 335px;
+    background-color: #1E203E;
+    padding: 14px 28px 14px 28px;
+    border: 1px solid #1E203E;
+    margin-top: 20px;
+    margin-left: 150px;
+    align-items: center;
+    color: #FFFFFF;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+@media (max-width: 430px) {
+    .reg_container{
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .left_reg-container{
+        width: 320px;
+        height: 320px;
+        margin-left: 30px;
+        margin-top: 30px;
+        border-radius: 50px 50px 0px 0px;
+    }
+    
+    .right_reg-container{
+        width: 320px;
+        height:fit-content;
+        margin-left: 30px;
+        border-radius: 0px 0px 50px 50px;
+    }
+
+    .sign_logo_btn{
+        position: relative;
+        width: 120px;
+        height: 30px;
+        margin-top: 0;
+        margin-left: 50px;
+        border-radius: 5px;
+        background-color: #FFFFFF;
+        border: 1px solid #FFFFFF;
+    }
+
+    .welcome{
+        margin-top: 70px;
+        font-size: 28px;
+    }
+    
+    .welcome_para{
+        font-size: 14px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .signin_btn{
+        width: 250px;
+        height: 40px;
+        margin-left: 40px;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+    .create_account{
+        margin-top: 20px;
+        font-size: 28px;
+    }
+    
+    .register_container{
+        margin-left: 40px;
+    }
+
+    .email_container , .password_container , .cpassword_container{
+        width: 220px;
+    }
+    
+    .username_container{
+        width: 240px;
+    }
+ 
+    .icon_container{
+        width: 220px;
+    }
+
+    .eye-icons{
+        padding-left: 200px;
+    }
+    
+    .reg_btn{
+        width: 220px;
+        height: 40px;
+        margin-left: 50px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+}
