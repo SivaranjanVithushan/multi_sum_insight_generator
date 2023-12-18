@@ -1,4 +1,4 @@
-.container {
+/* .container {
     background-color: #1E203E;
     height: fit-content;
     margin-top: 20px;
@@ -6,16 +6,15 @@
     margin-right: auto;
     margin-bottom: 45px;
     font-family: Poppins;
-}
+} */
 
-.header-content {
-    /* padding: 20px; */
+/* .header-content {
     padding-left: 20px;
     padding-right: 20px;
-}
+} */
 
-.logo_image{
-    /* width: 150px; */
+/* .logo_image{
+  
     margin: 0px;
     height: 100px;
     
@@ -34,9 +33,9 @@
     background-color: #FFFFFF;
     border: 1px solid #FFFFFF;
     margin-left: 10px;
-}
+} */
 
-.about_btn {
+/* .about_btn {
  
     background-color: #FFC900;
     border: 1px solid #FFC900;
@@ -173,4 +172,98 @@
         font-family: Roboto;
         margin-bottom: 20px;
     }
+} */
+
+/* Aboutus.css */
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #1e203e;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.logo_image {
+  height: 100px;
+  /* Adjust height based on your logo size */
+}
+
+.about_btn {
+  background-color: #ffc900;
+  color: #1e203e;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.content-body {
+  text-align: center;
+  padding: 20px;
+}
+
+.content-para {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.main-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.image_container {
+  padding: 20px;
+}
+
+.about_image {
+  width: 100%;
+  max-width: 350px; /* Adjust max-width based on your image size */
+  height: auto;
+}
+
+.para_container {
+  padding: 20px;
+  max-width: 600px; /* Adjust max-width based on your design */
+}
+
+.Para-body {
+  font-size: 18px;
+}
+
+.get_btn {
+  background-color: #ffc900;
+  color: #1e203e;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
