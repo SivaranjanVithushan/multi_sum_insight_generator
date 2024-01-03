@@ -14,6 +14,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #20224b;
 }
 
 code {
