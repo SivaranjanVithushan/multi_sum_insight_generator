@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import Logo from "../assets/deepcodelabs.png";
+import Logo from "../assets/logo.png";
 
 const navLinks = [
   { id: 1, href: "/", title: "Home" },
@@ -11,7 +11,7 @@ const navLinks = [
 const NavBar = () => {
   return (
     <nav className=" bg-blue-950 text-gray-400 p-4 sm:px-10 sm:pt-4 sm:pb-4 lg:p-4 xl:px-5 xl:pt-5 xl:pb-5 flex justify-between items-center sticky top-0 z-10">
-      <Link to="/" className="w-10 h-10">
+      <Link to="/" className="w-40 h-10">
         <img className="w-full h-full object-cover" src={Logo} alt="tailwind-logo" />
       </Link>
       <div className="flex gap-4">
