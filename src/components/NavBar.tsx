@@ -1,24 +1,28 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import { NavLink } from "../types/navlink.types";
 
-const navLinks = [
-  { id: 1, href: "/", title: "Home" },
-  { id: 3, href: "about", title: "About" },
-  { id: 2, href: "contact", title: "Contact" },
-];
+interface NavBarProps {
+  navLinks: NavLink[];
+}
 
-const NavBar = () => {
+const NavBar: React.FC<NavBarProps> = ({ navLinks }) => {
   return (
-    <nav className=" bg-blue-1000 text-gray-400 flex justify-between items-center sticky top-0 z-10">
-      <Link to="/" className="">
-        <img className="Logo-image" src={Logo} alt="tailwind-logo" />
+    <nav className="bg-blue-1000 text-gray-400 flex justify-between items-center sticky top-0 z-10 max-w-6xl m-auto p-4 h-[70px] bg-[#20224b]">
+      <Link to="/" className="p-0 hover:bg-gray-700">
+        <img
+          className="w-[150px] object-cover"
+          src={Logo}
+          alt="tailwind-logo"
+        />
       </Link>
-      <div className="flex gap-4">
-        {navLinks.map((link) => (
+      <div className="flex gap-4 p-0">
+        {navLinks.map((link: NavLink) => (
           <Link
             className="text-base font-medium hover:text-white transition-colors"
             key={link.id}
-            to={link.href}
+            to={`/${link.href}`}
           >
             {link.title}
           </Link>
