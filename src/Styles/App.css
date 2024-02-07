@@ -56,13 +56,13 @@
     cursor: pointer;
     border-radius: 10px;
   }
-  a:not(.active):hover{
+  /* a:not(.active):hover{
     background-color: #f5ab0c;
-    /* border-radius: 10px;
+    border-radius: 10px;
     color: black;
     height: auto;
-    width:auto; */
-  }
+    width:auto; 
+  } */
   .menu{
     display:none;
     position: absolute;
@@ -198,9 +198,9 @@
       width: 100%;
       height: auto;
     }
-    button{
+    /* button{
       display: none;
-    }
+    } */
     .header-container{
       display:contents;
     }
@@ -281,9 +281,7 @@
     .slide-container{
       gap: 10px;
     }
-    button{
-      display: none;
-    }
+   
   }
   
   

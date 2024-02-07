@@ -1,0 +1,134 @@
+.body{
+    background-color: #20224b;
+    display: flex;
+    justify-content:center;
+    align-items: center; 
+    padding: 145px 30px;
+}
+.block01{
+    width: 40%;
+    min-height: 60vh;
+    background-color: #232766;
+    justify-content: center;
+    align-items: center;
+    display:block;
+    border-radius: 40px 0px 0px 40px;
+}
+.logo{
+    width: 30%;
+}
+h2{
+    padding-top: 5%;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}
+.p-container{
+    display: contents;
+    justify-content: center;
+    align-items: center;
+}
+p{
+    color: #fff;
+    font-size: 22px;
+    text-align: center;
+}
+.register-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.r-button{
+    color: black;
+    background-color: #fff;
+    width: 50%;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 22px;
+    border:aliceblue;
+}
+.block02{
+    width: 40%;
+    min-height: 60vh;
+    background-color: #fff;
+    border-radius: 0px 40px 40px 0px;
+    display:flex;
+    justify-content: center;
+}
+.Sign{
+    /* width: max-content; */
+    justify-content: center;
+    padding-top: 15%;
+}
+.SignIn{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 25px;
+}
+label{
+    font-size: 20px;
+    font-weight: 400;   
+}
+.input-container{
+    padding: 4% 0%;
+}
+.input-email-container{
+    position: relative;
+    padding-bottom: 2%;
+}
+.email-icon{
+    position:absolute;
+    top: 55%;
+    padding-left: 4%;
+    width: 0%;
+    height: 0%;
+    color: #495057;
+}
+input{
+    padding-left: 20px;
+    font-size: 14px;
+    padding: 2% 15%;
+}
+.input-password-container{
+    position: relative;
+}
+.password-icon{
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 55%;
+    padding-left: 4%;
+    color: #495057;
+}
+.singin-button{
+    padding-top: 5%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}.s-button{
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    font-weight: bolder;
+    border-radius: 5px;
+    font-size: 22px;
+    border:aliceblue;
+}
+@media screen and (max-width: 766px) {
+    .body {
+        display: contents;
+        background-color: #20224b;
+    }
+    .block01{
+        width: 100%;
+        border-radius: 40px 40px 0px 0px;
+    }
+    .logo-container{
+        display: none;
+    }
+    .block02{
+        width: 100%;
+        border-radius: 0px 0px 40px 40px;
+    }
+
+  }
