@@ -96,9 +96,9 @@ function App() {
               <Route path="contact" element={<Contact />} />
               <Route path="landing" element={<Landing />} />
               <Route
-            path="/"
-            element={<Login onLogin={() => setIsLogged(false)} />}
-          />
+                path="/"
+                element={<Login onLogin={() => setIsLogged(false)} />}
+              />
               {/* <Route path='register' element={<Register/>} /> */}
             </Routes>
           </div>
@@ -112,7 +112,7 @@ function App() {
             path="register"
             element={<Register onRegister={handleLogin} />}
           />
-         
+
           {/* <Route path='register' element={<Register/>} /> */}
         </Routes>
       )}
