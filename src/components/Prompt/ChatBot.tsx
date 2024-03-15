@@ -37,9 +37,9 @@ export default function ChatBot({ imgUrl }: ChatBotProps) {
   };
 
   return (
-    <div className="md:h-[80vh] md:py-20 md:px-72 md:relative">
+    <div className="md:h-[80vh] md:py-20  md:relative">
       {formSubmitted && (
-        <div className=" flex flex-col gap-6">
+        <div className=" flex flex-col gap-6 lg:mx-48 md:mx-20">
           {imgUrl ? (
             <img className="w-10 h-10 rounded-full" src={imgUrl} alt="" />
           ) : (
@@ -76,8 +76,11 @@ export default function ChatBot({ imgUrl }: ChatBotProps) {
           </>
         )}
       </div>
-      <div className="md:absolute md:bottom-6 w-full md:w-1/2 ">
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="md:absolute md:bottom-6 flex justify-center w-full ">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full lg:mx-48 md:mx-20"
+        >
           <input
             className="w-full h-12 rounded-md mt-6 px-4 text-black"
             placeholder="Type your question and press enter"
