@@ -57,6 +57,7 @@ import Register from "./components/auth/Register";
 import Landing from "./components/LandingPage/Landing";
 import Home from "./components/home/home";
 import Example from "./sample/sample";
+import Prompt from "./components/Prompt/Prompt";
 
 function App() {
   // Use state to manage login status
@@ -99,6 +100,8 @@ function App() {
                 path="/"
                 element={<Login onLogin={() => setIsLogged(false)} />}
               />
+              <Route path="prompt" element={<Prompt />} />
+
               {/* <Route path='register' element={<Register/>} /> */}
             </Routes>
           </div>
@@ -112,6 +115,7 @@ function App() {
             path="register"
             element={<Register onRegister={handleLogin} />}
           />
+          <Route path="prompt" element={<Prompt />} />
 
           {/* <Route path='register' element={<Register/>} /> */}
         </Routes>
