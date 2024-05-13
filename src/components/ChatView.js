@@ -138,6 +138,10 @@ const ChatView = () => {
     }
   };
 
+  const handleGenerateImage = async () => {
+    // Your logic for generating image prompt here
+  };
+
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -199,6 +203,9 @@ const ChatView = () => {
           <div className="flex items-center">
             <button type="submit" className="chatview__btn-send" disabled={!formValue}>
               <MdSend size={30} />
+            </button>
+            <button type="button" className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white font-bold  px-2 rounded" onClick={handleGenerateImage}>
+              Generate Image
             </button>
             <input type="file" onChange={handleFileChange} />
           </div>

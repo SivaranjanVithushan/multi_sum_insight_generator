@@ -21,6 +21,13 @@ body {
   background-color: #20224b;
 }
 
+a {
+  text-decoration: none;
+  align-content: center;
+  font-size: large
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

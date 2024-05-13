@@ -9,7 +9,7 @@ interface NavBarProps {
 
 const NavBar: React.FC<NavBarProps> = ({ navLinks }) => {
   return (
-    <nav className="bg-blue-1000 text-gray-400 flex justify-between sticky top-0 z-10  m-auto  px-20 py-2 h-[70px] bg-[#20224b]">
+    <nav className="bg-blue-1000 text-gray-400 flex tems-center justify-between sticky top-0 z-10  m-auto  px-20 py-2 h-[90px] bg-[#20224b]">
       
       <Link to="/" className="p-0 hover:bg-gray-700">
         <img
