@@ -56,12 +56,18 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Landing from "./components/LandingPage/Landing";
 import Home from "./components/home/home";
-import Example from "./sample/sample";
+// import Example from "./sample/sample";
 import Prompt from "./components/Prompt/Prompt";
+import FileUpload from "./sample/sample";
+import { ChatContextProvider } from "./context/chatContext";
+import ChatView from "./components/ChatView";
+
+
 
 function App() {
   // Use state to manage login status
   const [isLogged, setIsLogged] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // Function to handle logout
   // const handleLogout = () => {
@@ -92,15 +98,23 @@ function App() {
           <NavBar navLinks={navLinks} />
           <div className="body-contain">
             <Routes>
-              <Route path="home" element={<Home />} />
+              <Route path="home" element={
+                // <Home/>
+                <ChatContextProvider>
+                <ChatView />
+              </ChatContextProvider>
+              } />
+              
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
               <Route path="landing" element={<Landing />} />
+              {/* <Route path="prompt" element={<ChatView />} /> */}
               <Route
                 path="/"
                 element={<Login onLogin={() => setIsLogged(false)} />}
               />
-              <Route path="prompt" element={<Prompt />} />
+
+
 
               {/* <Route path='register' element={<Register/>} /> */}
             </Routes>
@@ -115,7 +129,8 @@ function App() {
             path="register"
             element={<Register onRegister={handleLogin} />}
           />
-          <Route path="prompt" element={<Prompt />} />
+          <Route path="prompt" element={<Home />} />
+          <Route path='smaple' element={<FileUpload />} />
 
           {/* <Route path='register' element={<Register/>} /> */}
         </Routes>

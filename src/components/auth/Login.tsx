@@ -20,7 +20,7 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   const login = () => {
-    navigate('/Landing');
+    navigate('/home');
     onLogin();
   }
 
