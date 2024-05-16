@@ -1,6 +1,11 @@
 import * as React from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.png';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../firebase-config';  // Adjust the import path as necessary
+
+
 
 interface LoginProps {
   onLogin: () => void;
@@ -8,21 +13,26 @@ interface LoginProps {
 
 const Login : React.FC<LoginProps> = ({ onLogin }) => {
 
-  // const handleLogin = () => {
-  
-  //   onLogin();
-  // };
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      onLogin();
+      navigate('/home');
+    } catch (error) {
+      console.error("Error signing in", error);
+      alert("Error signing in. Please check your credentials and try again.");
+    }
+  }
 
   const handleClick = () => {
     navigate('/register');
   };
 
-  const login = () => {
-    navigate('/home');
-    onLogin();
-  }
+
 
 
   return (
@@ -70,12 +80,15 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b8c0d4b500438a8efe37648854b703cef87421071bda232efb4c424f647ae5d?"
                     alt="Icon"
                     className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full"
+
                   />
 
                   <input
                     type="email"
                     placeholder="Your email"
                     className="text-gray-400 text-xs font-medium w-full border-none focus:outline-none"
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
                   />
 
                 </div>
@@ -95,6 +108,8 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                     type="password"
                     placeholder="Your password"
                     className="text-gray-400 text-xs font-medium w-full border-none focus:outline-none"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <img
                     loading="lazy"
@@ -104,7 +119,7 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                   />
                 </div>
                 <button
-                  onClick={login}
+                  onClick={handleLogin}
                   
                   className="text-white text-center text-sm font-black leading-4 whitespace-nowrap justify-center items-center bg-slate-800 self-stretch mt-5 px-16 py-3.5 rounded-md max-md:max-w-full max-md:px-5"
                 >

@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import ChatMessage from './ChatMessage';
 import { ChatContext } from '../context/chatContext';
-import { MdSend, MdLightbulbOutline } from 'react-icons/md';
+import { MdSend } from 'react-icons/md';
 import 'react-tooltip/dist/react-tooltip.css';
-import { Tooltip as ReactTooltip } from 'react-tooltip';
+// import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 
 
@@ -17,7 +17,7 @@ const ChatView = () => {
   const [prompt, setPrompt] = useState('');
   // const [loading, setLoading] = useState(false);
   const [messages, addMessage] = useContext(ChatContext);
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
   const [modalPromptOpen, setModalPromptOpen] = useState(false);
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
@@ -45,11 +45,13 @@ const ChatView = () => {
    *
    * @param {string} newValue - The text of the new message.
    * @param {boolean} [ai] - Whether the message was sent by an AI or the user.
+   * @param {number} [id] - The ID of the new message.
    */
-  const updateMessage = (newValue, ai) => {
-    // const id = Date.now() + Math.floor(Math.random() * 1000000);
+  const updateMessage = (newValue, ai, id) => {
+    // 
+    console.log(id);
     const newMsg = {
-      id: messages.length + 1, 
+      id: id ,
       createdAt: Date.now(),
       text: newValue,
       ai: ai,
@@ -71,9 +73,18 @@ const ChatView = () => {
 
     const newMsg = cleanPrompt;
 
+    //genarate id
+    const id = Date.now() + Math.floor(Math.random() * 1000000);
+    
     setFormValue('');
-    updateMessage(newMsg, false);
-    await handleSubmit(newMsg);
+    updateMessage(newMsg, false ,id);
+    // Determine which button was clicked
+    if (e.nativeEvent.submitter.name === 'sendText') {
+      await handleSubmit(newMsg);
+    } else if (e.nativeEvent.submitter.name === 'generateImage') {
+      await handleGenerateImage(newMsg);
+    }
+  
 
   };
 
@@ -88,7 +99,6 @@ const ChatView = () => {
       alert('Please select a file first!');
       return;
     }
-    console.log("Vithu" + file + fileName);
 
     const formData = new FormData();
     formData.append('file', file, fileName);
@@ -114,19 +124,20 @@ const ChatView = () => {
       const reader = response.body != null ? response.body.getReader() : null;
       let chunks = ''; // Variable to accumulate chunks of data
 
-      if (reader != null) {
+      if (reader) {
         reader.read().then(function processText({ done, value }) {
           if (done) {
-            updateMessage(chunks, true);
+           
             console.log('Stream completed');
             return;
           }
           let text = new TextDecoder().decode(value);
-          console.log(text);
+         
           // Process text chunk
           chunks += text;
           setStreamOutput(chunks);// Accumulate chunks of data
-          console.log(text); // Optionally log each chunk
+          console.log(text);
+          updateMessage(text, true , 12);
           // Read the next chunk
           reader.read().then(processText);
         });
@@ -139,8 +150,41 @@ const ChatView = () => {
   };
 
   const handleGenerateImage = async () => {
-    // Your logic for generating image prompt here
+    const prompt = formValue.trim();
+    
+    if (!file) {
+      alert('Please select a file first!');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file, fileName);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'X-API-Key': 'your_api_key_here' // Replace with your actual API key
+      },
+      body: formData
+    };
+
+    try {
+      const response = await fetch(`https://arafath10-research-imagegen-api.hf.space/get_image_for_text?email=arafath&query=${encodeURIComponent(prompt)}`,options);
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const blob = await response.blob();
+      const imageUrl = URL.createObjectURL(blob);
+
+      updateMessage(`![Generated Image](${imageUrl})`, true);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
+
 
 
   const handleKeyDown = (e) => {
@@ -155,7 +199,7 @@ const ChatView = () => {
     setFormValue(event.target.value);
   };
 
- 
+
 
   const handleUseClicked = () => {
     setFormValue(prompt);
@@ -201,27 +245,26 @@ const ChatView = () => {
             onChange={handleChange}
           />
           <div className="flex items-center">
-            <button type="submit" className="chatview__btn-send" disabled={!formValue}>
+            <button type="submit" name="sendText" className="chatview__btn-send bg-blue-500 hover:bg-blue-700 text-white font-bold rounded" disabled={!formValue}>
               <MdSend size={30} />
             </button>
-            <button type="button" className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white font-bold  px-2 rounded" onClick={handleGenerateImage}>
-              Generate Image
+            <button
+              type="submit"
+              name="generateImage"
+              className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded"
+              // onClick={handleGenerateImage}
+            >
+              <i className="fas fa-image"></i>
+              {/* <span className="tooltip-text">Generate Image</span> */}
             </button>
-            <input type="file" onChange={handleFileChange} />
+            {/* <button type="button" className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white font-bold  px-2 rounded" onClick={handleGenerateImage}>
+              Generate Image
+            </button> */}
+            <input type="file" onChange={handleFileChange} className="ml-2" />
           </div>
         </div>
       </form>
-      {/* <Modal title="Setting" modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      </Modal>
-      <Modal title="Prompt Perfect" modalOpen={modalPromptOpen} setModalOpen={setModalPromptOpen}>
-        <PromptPerfect
-          prompt={prompt}
-          onChange={setPrompt}
-          onCancelClicked={() => setModalPromptOpen(false)}
-          onUseClicked={handleUseClicked}
-        />
-      </Modal> */}
+    
     </div>
   );
 };

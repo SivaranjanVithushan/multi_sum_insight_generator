@@ -5,7 +5,7 @@ import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 import moment from 'moment';
 import person from '../assets/person.png';
-import logo from '../assets/logo.png';
+import logo from '../assets/chatLogo.png';
 
 /**
  * A chat message component that displays a message with a timestamp and an icon.
@@ -34,6 +34,9 @@ const ChatMessage = (props) => {
                 </code>
               );
             },
+            img({ node, ...props }) {
+              return <img {...props} className="generated-image" alt="Generated content" />;
+            }
           }}
         >
           {text}

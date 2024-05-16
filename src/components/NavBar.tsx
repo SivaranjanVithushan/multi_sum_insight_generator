@@ -5,9 +5,10 @@ import { NavLink } from "../types/navlink.types";
 
 interface NavBarProps {
   navLinks: NavLink[];
+  handleLogout: () => void;  
 }
 
-const NavBar: React.FC<NavBarProps> = ({ navLinks }) => {
+const NavBar: React.FC<NavBarProps> = ({ navLinks, handleLogout }) => {
   return (
     <nav className="bg-blue-1000 text-gray-400 flex tems-center justify-between sticky top-0 z-10  m-auto  px-20 py-2 h-[90px] bg-[#20224b]">
       
@@ -28,7 +29,14 @@ const NavBar: React.FC<NavBarProps> = ({ navLinks }) => {
           >
             {link.title}
           </Link>
+
         ))}
+        <button
+          onClick={handleLogout}
+          className="text-base font-medium hover:text-white transition-colors"
+        >
+          Logout
+        </button>
       </div>
     </nav>
   );
