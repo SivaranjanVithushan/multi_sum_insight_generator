@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { MdChevronLeft, MdChevronRight, MdAdd, MdOutlineSettings } from 'react-icons/md';
-import { ChatContext } from '../context/chatContext';
+import { ChatContext } from '../../context/chatContext';
 import logo from '../assets/image/ChatBot.png';
 import Modal from './Modal';
 import Setting from './Setting';

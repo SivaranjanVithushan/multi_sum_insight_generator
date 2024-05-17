@@ -7,13 +7,11 @@ import GetStarted from "./components/GetStarted";
 import NavBar from "./components/NavBar";
 import { navLinks } from "./constants/navlinks";
 import Landing from "./components/LandingPage/Landing";
-import FileUpload from "./sample/sample";
 import { ChatContextProvider } from "./context/chatContext";
-import ChatView from "./components/ChatView";
+import ChatView from "./components/home/ChatView";
 import About from "./components/about/About";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import Home from "./components/home/home";
 import { auth } from "./firebase-config"; 
 
 
@@ -73,7 +71,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/register" element={<Register onRegister={handleLogin} />}/>
-          <Route path="prompt" element={<Home />} />
+          {/* <Route path="prompt" element={<Home />} /> */}
         </Routes>
       )}
     </>

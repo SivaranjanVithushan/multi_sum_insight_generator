@@ -1,7 +1,6 @@
 // Contact.tsx
 import React, { useState } from 'react';
 import contactImage from '../assets/contactus.png'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 
 function ContactForm() {

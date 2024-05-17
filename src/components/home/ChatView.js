@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import ChatMessage from './ChatMessage';
-import { ChatContext } from '../context/chatContext';
+import ChatMessage from '../home/ChatMessage';
+import { ChatContext } from '../../context/chatContext';
 import { MdSend } from 'react-icons/md';
 import 'react-tooltip/dist/react-tooltip.css';
-// import { Tooltip as ReactTooltip } from 'react-tooltip';
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase-config";
 
 
 
@@ -15,14 +16,29 @@ const ChatView = () => {
   const inputRef = useRef();
   const [formValue, setFormValue] = useState('');
   const [prompt, setPrompt] = useState('');
-  // const [loading, setLoading] = useState(false);
   const [messages, addMessage] = useContext(ChatContext);
-  // const [modalOpen, setModalOpen] = useState(false);
   const [modalPromptOpen, setModalPromptOpen] = useState(false);
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
   const [streamOutput, setStreamOutput] = useState(""); // State to store streaming data
+  const [userDetails, setUserDetails] = useState(null);
 
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      const user = auth.currentUser;
+      if(user){
+        const docRef = doc(db, 'users',user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUserDetails(docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+      }
+    };
+    fetchUserDetails();
+  },[]);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files?.[0];
@@ -113,7 +129,7 @@ const ChatView = () => {
     };
 
     try {
-      const response = await fetch('https://research-project-h4fb.onrender.com/get_prediction_and_QA?email=a&query=' + prompt, options);
+      const response = await fetch(`https://research-project-h4fb.onrender.com/get_prediction_and_QA?email=${userDetails.email}&query=${encodeURIComponent(prompt)}`, options);
 
       console.log(response);
 
@@ -170,7 +186,7 @@ const ChatView = () => {
     };
 
     try {
-      const response = await fetch(`https://arafath10-research-imagegen-api.hf.space/get_image_for_text?email=arafath&query=${encodeURIComponent(prompt)}`,options);
+      const response = await fetch(`https://arafath10-research-imagegen-api.hf.space/get_image_for_text?email=${userDetails.email}&query=${encodeURIComponent(prompt)}`,options);
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
