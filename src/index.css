@@ -106,14 +106,7 @@ code {
     transition-duration: 300ms;
 }
 
-.chatview__btn-generate {
-  padding: 1rem 2rem; /* Increase padding */
-  font-size: 1.25rem; /* Increase font size */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
+
 
 .chatview__btn-generate:hover {
   background-color: #005bb5; /* Change hover background color */
@@ -148,17 +141,22 @@ code {
     resize-y rounded-xl; 
   }
 
-  .chatview__btn-send {
+  /* .chatview__btn-send {
     @apply h-16 w-16 px-4 mx-2 rounded-full cursor-pointer hover:bg-slate-200 hover:dark:bg-dark-grey border-2 border-slate-400
     dark:border-slate-500 focus:ring-offset-indigo-200 text-black dark:text-white transition 
     ease-in-out duration-300 text-center text-base font-semibold shadow-md
     flex items-center justify-center
     focus:outline-none focus:ring-0 focus:ring-offset-0;
   
-  }
+  } */
 
   .chatview__btn-send:disabled {
     @apply opacity-40 transition ease-in duration-300 text-center text-base font-semibold shadow-md;
+  }
+
+  .chatview__btn-generate:disabled {
+    @apply opacity-40 transition ease-in duration-300 text-center text-base font-semibold shadow-md;
+    padding: 1.1rem; 
   }
 
   /* ChatMessage */
@@ -259,6 +257,12 @@ code {
   border-radius: 0.5rem;
   font-size: 1.25rem;
   cursor: pointer;
+
+}
+
+.chatview__btn-generate {
+  padding: 1rem; 
+
 }
 
 .chatview__btn-send {
@@ -266,16 +270,22 @@ code {
   color: white;
 }
 
-.chatview__btn-send:disabled {
+/* .chatview__btn-send:disabled {
   background-color: #6c757d;
   cursor: not-allowed;
-}
+} */
 
 .chatview__btn-generate {
   background-color: #007bff;
   color: white;
-  position: relative;
+  /* position: relative; */
 }
+
+/* .chatview__btn-generate:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+} */
+
 
 .chatview__btn-generate:hover {
   background-color: #0056b3;

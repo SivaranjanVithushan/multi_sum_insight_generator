@@ -325,16 +325,21 @@ const handleGenerateImage = async () => {
             onChange={handleChange}
           />
           <div className="flex items-center">
-            <button type="submit" name="sendText" className="chatview__btn-send bg-blue-500 hover:bg-blue-700 text-white font-bold rounded" disabled={!formValue}>
+            <button 
+            type="submit" 
+            name="sendText" 
+            className="chatview__btn-send bg-blue-500 text-white font-bold rounded" 
+            disabled={!formValue}>
               <MdSend size={30} />
             </button>
             <button
               type="submit"
               name="generateImage"
-              className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 rounded"
+              className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
+              disabled={!formValue}
             >
               <i className="fas fa-image"></i>
-              {/* <span className="tooltip-text">Generate Image</span> */}
+              <span className="tooltip-text">Generate Image</span>
             </button>
            
             <input type="file" onChange={handleFileChange} className="ml-2" />
