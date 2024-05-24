@@ -1,5 +1,8 @@
-import * as React from "react";
+import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
+import {auth, db} from '../../firebase-config';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import {doc,setDoc} from 'firebase/firestore';
 import logo from '../../assets/logo.png'
 
 interface RegisterProps {
@@ -9,16 +12,44 @@ interface RegisterProps {
 
 const Register: React.FC<RegisterProps> = ({ onRegister }) => {
 
-    const handleLogin = () => {
-        // Perform your login logic
-        // ...
-    
-        // Call the onLogin prop to notify the parent component about the login
-        onRegister();
-      };
+    const [name , setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    // const handleLoginRedirect = () => {
+    //     navigate('/login');
+    // };
+
+    const handleRegister = async() => {
+        if(password !== confirmPassword){
+            alert("passwords do not match");
+            return;
+        }
+        
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth,email,password);
+            const user = userCredential.user;
+
+            await setDoc(doc(db, "users", user.uid),{
+                name,
+                email
+            });
+
+            onRegister();
+            navigate('/login');
+        } catch (error) {
+            console.error("Error registering user", error);
+        }
+    
+        // Call the onLogin prop to notify the parent component about the login
+       
+      };
+   
+
+    const handleLoginRedirect = () => {
         navigate('/login');
     };
 
@@ -44,7 +75,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                     login with your personal info
                                 </div>
                                 <button
-                                    onClick={handleClick}
+                                    onClick={handleLoginRedirect}
                                     className="text-slate-800 text-center text-sm font-black leading-4 whitespace-nowrap justify-center items-center bg-white self-center w-[456px] max-w-full mt-28 mb-36 px-16 py-3.5 rounded-md max-md:my-10 max-md:px-5"
                                 >
                                     SIGN IN
@@ -61,7 +92,12 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                     <div className="text-slate-800 text-sm font-medium mt-16 max-md:max-w-full max-md:mt-10">
                                         User name
                                     </div>
-                                    <input className="text-gray-400 text-xs font-medium items-stretch rounded border focus:outline-none border-[color:var(--Base-Gray-4,#757575)] bg-white justify-center mt-1.5 px-3 py-3.5 border-solid max-md:max-w-full" type="email" placeholder='Your name' />
+                                    <input 
+                                    className="text-gray-400 text-xs font-medium items-stretch rounded border focus:outline-none border-[color:var(--Base-Gray-4,#757575)] bg-white justify-center mt-1.5 px-3 py-3.5 border-solid max-md:max-w-full" 
+                                    type="email"
+                                     placeholder='Your name' 
+                                     onChange={(e) => setName(e.target.value)}
+                                     />
 
                                     <div className="text-slate-800 text-sm font-medium mt-5 max-md:max-w-full">
                                         Email
@@ -77,6 +113,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                             type="email"
                                             placeholder="Your email"
                                             className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
+                                            onChange={(e) => setEmail(e.target.value)}
                                         />
                                         <img
                                             loading="lazy"
@@ -100,6 +137,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                             type="password"
                                             placeholder="Your password"
                                             className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
+                                            onChange={(e) => setPassword(e.target.value)}
                                         />
                                         <img
                                             loading="lazy"
@@ -123,6 +161,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                             type="password"
                                             placeholder="Re-enter your password"
                                             className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
                                         />
                                         <img
                                             loading="lazy"
@@ -133,7 +172,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                     </div>
 
                                     <button
-                                        className="text-white text-center text-sm font-black leading-4 whitespace-nowrap justify-center items-center bg-slate-800 mt-5 px-16 py-3.5 rounded-md max-md:max-w-full max-md:px-5" onClick={handleLogin}
+                                        className="text-white text-center text-sm font-black leading-4 whitespace-nowrap justify-center items-center bg-slate-800 mt-5 px-16 py-3.5 rounded-md max-md:max-w-full max-md:px-5" onClick={handleRegister}
                                     >
                                         REGISTER
                                     </button>

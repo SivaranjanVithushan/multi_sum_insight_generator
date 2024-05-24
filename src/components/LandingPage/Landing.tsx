@@ -1,14 +1,13 @@
-import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.png'
+// import { useNavigate } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 
 const Landing = () => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate('/register');
-  };
+  // const handleClick = () => {
+  //   navigate('/register');
+  // };
 
   const onDrop = (acceptedFiles: any) => {
     // Handle the dropped files here

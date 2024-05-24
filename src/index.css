@@ -1,4 +1,3 @@
-@import-normalize;
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
@@ -63,13 +62,6 @@ code {
   .nav {
     @apply flex justify-around;
   }
-/* 
-  .nav__item {
-    @apply px-4 py-3 flex items-center gap-x-4 w-full 
-    rounded-md cursor-pointer 
-    hover:bg-light-white
-    text-slate-700 text-base;
-  } */
 
   .nav__icons {
     @apply cursor-pointer duration-300 text-slate-700
@@ -101,16 +93,12 @@ code {
     @apply font-mono;
   }
 
-  /* CHATVIEW */
-  /* .chatview {
-    @apply flex flex-col h-screen duration-300 overflow-hidden relative bg-slate-100
-  dark:bg-light-grey;
-  } */
-
   .chatview {
     position: relative;
     display: flex;
-    height: 92vh;
+    height: 91vh;
+    width: 90%;
+    align-items: center;
     flex-direction: column;
     overflow: hidden;
     --tw-bg-opacity: 1;
@@ -118,8 +106,22 @@ code {
     transition-duration: 300ms;
 }
 
+.chatview__btn-generate {
+  padding: 1rem 2rem; /* Increase padding */
+  font-size: 1.25rem; /* Increase font size */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.chatview__btn-generate:hover {
+  background-color: #005bb5; /* Change hover background color */
+}
+
   .chatview__chatarea {
     @apply flex-grow w-full overflow-y-scroll flex flex-col shadow-md;
+    width: 95%;
   }
 
   .form {
@@ -143,7 +145,7 @@ code {
   .chatview__textarea-message {
     @apply bg-light-white ml-0 sm:ml-2 dark:bg-light-grey sm:w-full grow p-2 w-full
     border-2 border-slate-400 dark:border-slate-500 overflow-y-hidden mx-2 focus:outline-none
-    resize-y rounded-xl;
+    resize-y rounded-xl; 
   }
 
   .chatview__btn-send {
@@ -152,6 +154,7 @@ code {
     ease-in-out duration-300 text-center text-base font-semibold shadow-md
     flex items-center justify-center
     focus:outline-none focus:ring-0 focus:ring-offset-0;
+  
   }
 
   .chatview__btn-send:disabled {
@@ -229,4 +232,94 @@ code {
 
 ::-webkit-scrollbar-thumb {
   @apply bg-light-grey dark:bg-dark-grey rounded-xl;
+}
+
+
+.form {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.chatview__textarea-message {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  resize: none;
+  font-size: 1rem;
+}
+
+.chatview__btn-send,
+.chatview__btn-generate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.chatview__btn-send {
+  background-color: #28a745;
+  color: white;
+}
+
+.chatview__btn-send:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.chatview__btn-generate {
+  background-color: #007bff;
+  color: white;
+  position: relative;
+}
+
+.chatview__btn-generate:hover {
+  background-color: #0056b3;
+}
+
+.chatview__btn-generate .tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.chatview__btn-generate:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+input[type="file"] {
+  margin-left: 0.5rem;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position the tooltip above the button */
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
