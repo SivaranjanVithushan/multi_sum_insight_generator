@@ -1,32 +1,32 @@
 // Contact.tsx
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import contactImage from '../assets/contactus.png'
 
 
 function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    Contact: '',
-    message: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   email: '',
+  //   Contact: '',
+  //   message: '',
+  // });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
+  // };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // You can handle the form submission logic here
-    console.log('Form submitted:', formData);
-  };
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   // You can handle the form submission logic here
+  //   console.log('Form submitted:', formData);
+  // };
 
-  const [contactNumber, setContactNumber] = useState("");
+  // const [contactNumber, setContactNumber] = useState("");
 
-  const handleContactNumberChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-    setContactNumber(event.target.value);
-  };
+  // const handleContactNumberChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  //   setContactNumber(event.target.value);
+  // };
 
   return (
 

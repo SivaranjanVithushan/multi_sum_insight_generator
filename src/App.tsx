@@ -1,6 +1,6 @@
 
 import React, { useState ,useEffect} from "react";
-import { Link, Navigate, Route, Routes,useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes,useNavigate } from "react-router-dom";
 import "./Styles/App.css";
 import Contact from "./components/Contact";
 import GetStarted from "./components/GetStarted";
