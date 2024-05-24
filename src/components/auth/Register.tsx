@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import {auth, db} from '../../firebase-config';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {doc,setDoc} from 'firebase/firestore';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.png';
+import hide from '../../assets/icons/hide.png';
+import show from '../../assets/icons/view.png';
 
 interface RegisterProps {
     onRegister: () => void;
@@ -16,6 +18,8 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -39,13 +43,23 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
             });
 
             onRegister();
-            navigate('/login');
+            navigate('/home');
         } catch (error) {
             console.error("Error registering user", error);
         }
     
         // Call the onLogin prop to notify the parent component about the login
        
+      };
+
+  
+
+      const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+      };
+    
+      const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
       };
    
 
@@ -115,12 +129,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                             className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
                                             onChange={(e) => setEmail(e.target.value)}
                                         />
-                                        <img
-                                            loading="lazy"
-                                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/2041230e855b72cb4256b8d9516fd3ef303b4b735fc046bd4cb472ab6ddf9e17?"
-                                            alt="Icon 2"
-                                            className="w-4 h-4 self-start"
-                                        />
+
                                     </div>
 
                                     <div className="text-slate-800 text-sm font-medium mt-5 max-md:max-w-full">
@@ -134,16 +143,17 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                             className="w-4 h-4 self-start"
                                         />
                                         <input
-                                            type="password"
+                                            type={showPassword ? 'text' : 'password'}
                                             placeholder="Your password"
                                             className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
                                         <img
                                             loading="lazy"
-                                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/2041230e855b72cb4256b8d9516fd3ef303b4b735fc046bd4cb472ab6ddf9e17?"
+                                            src={showPassword ? show:hide}
                                             alt="Icon 2"
                                             className="w-4 h-4 self-start"
+                                            onClick={togglePasswordVisibility}
                                         />
                                     </div>
 
@@ -158,16 +168,17 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                             className="w-4 h-4 self-start"
                                         />
                                         <input
-                                            type="password"
+                                            type={showConfirmPassword ? 'text' : 'password'}
                                             placeholder="Re-enter your password"
                                             className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
                                             onChange={(e) => setConfirmPassword(e.target.value)}
                                         />
                                         <img
                                             loading="lazy"
-                                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/72b153ba6fd581a6d8dcaf52f0e343ebc52ffa6de041250e6501f7ad6bc2bc54?"
+                                            src={showConfirmPassword ? show:hide}
                                             alt="Icon 2"
                                             className="w-4 h-4 self-start"
+                                            onClick={toggleConfirmPasswordVisibility}
                                         />
                                     </div>
 
