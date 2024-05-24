@@ -39,7 +39,7 @@ const Members = () => {
                 />
               </div>
               <div className="text-black text-center text-2xl font-bold leading-9 tracking-wide self-center mt-7">
-                ARAFATH <br /> ICT19805 <br /> ict19805@gmail.com <br /> 0754123799 <br /> Software Techology
+              A.L.F.Fareeha <br /> ICT/19/823 <br /> ict19823@gmail.com <br /> 0766951999 <br /> Software Techology
               </div>
             </form>
           </div>
