@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase-config';  // Adjust the import path as necessary
-
+import hide from '../../assets/icons/hide.png';
+import show from '../../assets/icons/view.png';
 
 
 interface LoginProps {
@@ -16,6 +17,7 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -33,7 +35,9 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
   };
 
 
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div className="justify-center items-stretch flex flex-col px-16 py-12 max-md:px-5">
@@ -105,7 +109,7 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                     className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full self-start"
                   />
                   <input
-                    type="password"
+                   type={showPassword ? 'text' : 'password'}
                     placeholder="Your password"
                     className="text-gray-400 text-xs font-medium w-full border-none focus:outline-none"
                     value={password}
@@ -113,9 +117,10 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                   />
                   <img
                     loading="lazy"
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/1e81cd6ee340f3eb8f35bdc9bd9ead4284a10a9024deb462736892124cfcecc2?"
+                    src={showPassword ? show:hide}
                     alt="Icon 2"
                     className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full self-start"
+                    onClick={togglePasswordVisibility}
                   />
                 </div>
                 <button
