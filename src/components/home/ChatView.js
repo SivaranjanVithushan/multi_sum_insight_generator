@@ -300,9 +300,10 @@ const ChatView = () => {
               <button
                 type="submit"
                 name="generateImage"
-                className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
+                className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white text-lg font-bold rounded"
                 disabled={!formValue}
                 data-tip="Generate Image"
+                style={{fontSize: '1.11rem'}}
               >
                 <MdImage size={20} />
               </button>

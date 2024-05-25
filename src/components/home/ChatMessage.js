@@ -181,7 +181,7 @@ const ChatMessage = (props) => {
           </ReactMarkdown>
         )}
 
-        <div className="text-left message__createdAt">{moment(createdAt).calendar()}</div>
+        <div className="text-left text-xs message__createdAt">{moment(createdAt).calendar() }</div>
       </div>
 
       <div className="message__pic">
