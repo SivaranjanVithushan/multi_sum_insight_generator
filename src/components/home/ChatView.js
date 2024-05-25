@@ -276,7 +276,8 @@ const ChatView = () => {
         <div className="flex items-stretch justify-between w-full">
           <textarea
             ref={inputRef}
-            className="chatview__textarea-message"
+            className="chatview__textarea-message placeholder:text-gray-400"
+            placeholder="Type a prompt here..."
             rows={1}
             value={formValue}
             onKeyDown={handleKeyDown}
@@ -299,9 +300,10 @@ const ChatView = () => {
               <button
                 type="submit"
                 name="generateImage"
-                className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white font-bold rounded"
+                className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white text-lg font-bold rounded"
                 disabled={!formValue}
                 data-tip="Generate Image"
+                style={{fontSize: '1.11rem'}}
               >
                 <MdImage size={20} />
               </button>

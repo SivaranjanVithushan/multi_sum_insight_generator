@@ -139,6 +139,10 @@ code {
     @apply bg-light-white ml-0 sm:ml-2 dark:bg-light-grey sm:w-full grow p-2 w-full
     border-2 border-slate-400 dark:border-slate-500 overflow-y-hidden mx-2 focus:outline-none
     resize-y rounded-xl; 
+    margin-left: 2rem;
+    margin-right: 1rem;
+   
+  
   }
 
   /* .chatview__btn-send {
@@ -170,6 +174,8 @@ code {
 
   .message__markdown {
     @apply text-sm text-slate-700 whitespace-pre-wrap dark:text-slate-200;
+    font-weight: 400;
+
   }
 
   .message__createdAt {
@@ -178,7 +184,10 @@ code {
   }
 
   .message__pic {
-    @apply h-8 w-8 bg-slate-200 mx-2 rounded-full flex items-center justify-center text-xl;
+    @apply rounded-full flex items-center justify-center text-xl;
+   background-color: rgb(32 34 75);
+   height: 3rem;
+   width: 4rem;
   }
 
   .message__thinking {
@@ -317,22 +326,6 @@ input[type="file"] {
   margin-left: 0.5rem;
 }
 
-/* .tooltip-text {
-  visibility: hidden;
-  width: 120px;
-  background-color: #000;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-} */
 
 .upload-label {
   display: inline-block;
