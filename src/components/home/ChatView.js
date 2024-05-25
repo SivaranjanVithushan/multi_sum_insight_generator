@@ -276,7 +276,8 @@ const ChatView = () => {
         <div className="flex items-stretch justify-between w-full">
           <textarea
             ref={inputRef}
-            className="chatview__textarea-message"
+            className="chatview__textarea-message placeholder:text-gray-400"
+            placeholder="Type a prompt here..."
             rows={1}
             value={formValue}
             onKeyDown={handleKeyDown}

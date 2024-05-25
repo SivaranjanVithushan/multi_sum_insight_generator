@@ -186,7 +186,7 @@ const ChatMessage = (props) => {
 
       <div className="message__pic">
         <div className="avatar">
-          <div className="w-8 border rounded-full">
+          <div className="border rounded-full">
             {ai ? <img width="30" src={logo} alt="Logo" /> : <img src={person} alt="profile pic" />}
           </div>
         </div>

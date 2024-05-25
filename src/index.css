@@ -139,6 +139,8 @@ code {
     @apply bg-light-white ml-0 sm:ml-2 dark:bg-light-grey sm:w-full grow p-2 w-full
     border-2 border-slate-400 dark:border-slate-500 overflow-y-hidden mx-2 focus:outline-none
     resize-y rounded-xl; 
+    margin-left: 2rem;
+    margin-right: 1rem;
   }
 
   /* .chatview__btn-send {
@@ -178,7 +180,10 @@ code {
   }
 
   .message__pic {
-    @apply h-8 w-8 bg-slate-200 mx-2 rounded-full flex items-center justify-center text-xl;
+    @apply bg-slate-200 mx-2 rounded-full flex items-center justify-center text-xl;
+   background-color: rgb(32 34 75);
+   height: 3rem;
+    \width: 4rem;
   }
 
   .message__thinking {
