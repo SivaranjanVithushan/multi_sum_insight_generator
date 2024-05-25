@@ -156,7 +156,7 @@ code {
 
   .chatview__btn-generate:disabled {
     @apply opacity-40 transition ease-in duration-300 text-center text-base font-semibold shadow-md;
-    padding: 1.1rem; 
+    /* padding: 1.1rem;  */
   }
 
   /* ChatMessage */
@@ -317,7 +317,7 @@ input[type="file"] {
   margin-left: 0.5rem;
 }
 
-.tooltip-text {
+/* .tooltip-text {
   visibility: hidden;
   width: 120px;
   background-color: #000;
@@ -327,9 +327,37 @@ input[type="file"] {
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  bottom: 125%; /* Position the tooltip above the button */
+  bottom: 125%;
   left: 50%;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
+} */
+
+.upload-label {
+  display: inline-block;
+  cursor: pointer;
+  /* padding: 0.5rem 0.5rem; */
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background-color: #2196f3; /* Your desired button color */
+ 
+}
+
+.upload-button {
+  background-color: #2196f3;
+  color: white; 
+  height: 3rem;
+}
+
+.upload-button:hover {
+  background-color: #1976d2; 
+}
+
+.upload-indicator {
+  margin-left: 8px;
+  color: green; /* Color for the upload indicator */
+  font-weight: bold;
+  margin-right: 8px;
 }

@@ -52,7 +52,7 @@ function App() {
           <NavBar navLinks={navLinks} handleLogout={handleLogout} />
           <div className="body-contain">
             <Routes>
-              <Route path="home" element={
+              <Route path="/home" element={
                 // <Home/>
                 <ChatContextProvider>
                 <ChatView />
