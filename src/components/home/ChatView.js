@@ -5,6 +5,11 @@ import { MdImage, MdSend, MdUploadFile } from 'react-icons/md';
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase-config";
 import { Tooltip, Input, Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
@@ -17,9 +22,7 @@ const ChatView = () => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
   const [userDetails, setUserDetails] = useState(null);
-
-
-
+  const [language, setLanguage] = useState('');
 
 
   useEffect(() => {
@@ -41,13 +44,11 @@ const ChatView = () => {
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files?.[0];
-
     if (selectedFile) {
       setFile(selectedFile);
       setFileName(selectedFile.name);
     }
   };
-
 
   /**
    * Scrolls the chat area to the bottom.
@@ -64,9 +65,6 @@ const ChatView = () => {
    * @param {number} [id] - The ID of the new message.
    */
   const updateMessage = (newValue, ai, id, img) => {
-
-    // 
-    console.log(id);
     const newMsg = {
       id: id,
       createdAt: Date.now(),
@@ -243,6 +241,10 @@ const ChatView = () => {
     setFormValue(event.target.value);
   };
 
+  const handleLangageChange = (event) => {
+    setLanguage(event.target.value);
+  };
+
 
   /**
    * Scrolls the chat area to the bottom when the messages array is updated.
@@ -283,7 +285,25 @@ const ChatView = () => {
             onKeyDown={handleKeyDown}
             onChange={handleChange}
           />
+
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Language</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={language}
+                label="Language"
+                onChange={handleLangageChange}
+              >
+                <MenuItem value={"English"}>English</MenuItem>
+                <MenuItem value={"Tamil"}>Tamil</MenuItem>
+                <MenuItem value={"Sinhala"}>Sinhala</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
           <div className="flex items-center">
+
             {/* Send button */}
             <Tooltip title="Text Generator" arrow>
               <button
@@ -303,22 +323,13 @@ const ChatView = () => {
                 className="chatview__btn-generate bg-blue-500 hover:bg-blue-700 text-white text-lg font-bold rounded"
                 disabled={!formValue}
                 data-tip="Generate Image"
-                style={{fontSize: '1.11rem'}}
+                style={{ fontSize: '1.11rem' }}
               >
                 <MdImage size={20} />
               </button>
             </Tooltip>
 
-            {/* Tooltip with file input */}
-            {/* <Tooltip title="Upload your Dataset" arrow>
-              <label htmlFor="upload-file" className="upload-label">
-                <Input
-                  type="file"
-                  onChange={handleFileChange}
-                  className="ml-2"
-                />
-              </label>
-            </Tooltip> */}
+
             <Tooltip title="Upload your Dataset" arrow>
               <label htmlFor="upload-file" className="upload-label ">
                 <Input
@@ -332,7 +343,7 @@ const ChatView = () => {
                   component="span"
                   startIcon={<MdUploadFile />}
                   className="upload-button"
-                  style={{ backgroundColor: '#3f51b5', color: 'white', padding: '0 10px',}}
+                  style={{ backgroundColor: '#3f51b5', color: 'white', padding: '0 10px', }}
                 >
                   {fileName ? `${fileName.slice(0, 15)}${fileName.length > 15 ? '...' : ''}` : 'Upload File'}
                 </Button>
