@@ -21,7 +21,7 @@ const Members = () => {
                 />
               </div>
               <div className="text-black text-center text-2xl font-bold leading-9 tracking-wide self-center mt-7">
-                ARAFATH <br /> ICT19805 <br /> ict19805@gmail.com <br /> 0754123799 <br /> Software Techology
+                ARAFATH <br /> ICT/19/805 <br /> ict19805@gmail.com <br /> 0754123799 <br /> Software Techology
               </div>
             </form>
           </div>
@@ -57,7 +57,7 @@ const Members = () => {
                 />
               </div>
               <div className="text-black text-center text-2xl font-bold leading-9 tracking-wide self-center mt-7">
-                VITHUSHAN <br /> ICT19868 <br /> ict19868@gmail.com <br /> 0772644218 <br /> Software Techology
+                S. VITHUSHAN <br /> ICT/19/868 <br /> ict19868@gmail.com <br /> 0772644218 <br /> Software Techology
               </div>
             </form>
           </div>

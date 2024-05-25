@@ -1,180 +1,4 @@
-/* .container {
-    background-color: #1E203E;
-    height: fit-content;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 45px;
-    font-family: Poppins;
-} */
-
-/* .header-content {
-    padding-left: 20px;
-    padding-right: 20px;
-} */
-
-/* .logo_image{
-  
-    margin: 0px;
-    height: 100px;
-    
-
-}
-
-.logo_btn, .about_btn, .get_btn{
-    width: 150px;
-    height: 50px;
-    border-radius: 16px;
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.logo_btn {
-    background-color: #FFFFFF;
-    border: 1px solid #FFFFFF;
-    margin-left: 10px;
-} */
-
-/* .about_btn {
- 
-    background-color: #FFC900;
-    border: 1px solid #FFC900;
-    font-weight: 500;
-    margin-left: 10px;
-    margin-top: 10px;
-    float: right;
-}
-
-.get_btn{
-    width: 130px;
-    height: 40px;
-    background-color: #FFC900;
-    border: 1px solid #FFC900;
-    font-size: 16px;
-    font-size: 500;
-    font-family: 'Roboto', sans-serif;
-}
-
-.get_btn:hover{
-    background-color: #d8ae23;
-    border: 1px solid #FFC900;
-    color: #000;
-}
-
-
-
-.content-body {
-    text-align: center;
-}
-
-.content-para {
-    font-size: 40px;
-    color: #FFFFFF;
-    font-weight: 600;
-}
-
-.main-container {
-    display: flex;
-    flex-direction: row;
-}
-
-.image_container {
-    padding-left: 50px;
-}
-
-.about_image {
-    width: 380px;
-    height: 380px;
-}
-
-.para_container {
-    flex: 1;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-.Para-body {
-    font-size: 30px;
-    font-weight: 300;
-    color: #FFFFFF;
-    text-align: justify;
-}
-
-
-
-@media (max-width: 430px) {
-    .container{
-        height: fit-content;
-    }
-
-    .logo_btn{
-        width: 100px;
-        height: 30px;
-        font-size: 10px;
-    }
-
-    .about_btn{
-        width: 100px;
-        height: 30px;
-        font-size: 12px;
-        font-weight: 500;
-    }
-
-    .content-body {
-        text-align: center;
-        width: 300px;
-        margin-left: 35px;
-        margin-right: 35px;
-    }
-
-    .content-para{
-        font-size: 20px;
-        color: #FFFFFF;
-        font-weight: 600;
-        text-align: justify;
-    }
-
-    .main-container {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .image_container {
-        padding-left: 35px;
-    }
-    
-    .about_image {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .para_container {
-        flex: 1;
-        padding-left: 35px;
-        padding-right: 35px;
-    }
-    
-    .Para-body {
-        font-size: 15px;
-        font-weight: 500;
-        color: #FFFFFF;
-        line-height: 18.8px;
-        text-align: justify;
-    }
-    
-    .get_btn{
-        width: 80px;
-        height: 30px;
-        background-color: #FFC900;
-        border: 1px solid #FFC900;
-        font-size: 12px;
-        font-size: 500;
-        font-family: Roboto;
-        margin-bottom: 20px;
-    }
-} */
-
-/* Aboutus.css */
+Aboutus.css
 
 body,
 html {
@@ -203,7 +27,7 @@ html {
 
 .logo_image {
   height: 100px;
-  /* Adjust height based on your logo size */
+ 
 }
 
 .about_btn {
@@ -238,13 +62,13 @@ html {
 
 .about_image {
   width: 100%;
-  max-width: 350px; /* Adjust max-width based on your image size */
+  max-width: 350px;
   height: auto;
 }
 
 .para_container {
   padding: 20px;
-  max-width: 600px; /* Adjust max-width based on your design */
+  max-width: 600px; 
 }
 
 .Para-body {
