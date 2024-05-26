@@ -63,14 +63,16 @@ const ChatView = () => {
    * @param {string} newValue - The text of the new message.
    * @param {boolean} [ai] - Whether the message was sent by an AI or the user.
    * @param {number} [id] - The ID of the new message.
+   * @param {boolean} [img] - Whether the message is an image.
    */
-  const updateMessage = (newValue, ai, id, img) => {
+  const updateMessage = (newValue, ai, id, img ) => {
     const newMsg = {
       id: id,
       createdAt: Date.now(),
       text: newValue,
       ai: ai,
-      img: img
+      img: img,
+     
     };
 
     addMessage(newMsg);
@@ -102,9 +104,9 @@ const ChatView = () => {
     updateMessage(newMsg, false, id);
     // Determine which button was clicked
     if (e.nativeEvent.submitter.name === 'sendText') {
-      await handleSubmit(newMsg);
+      await handleSubmit(newMsg, id);
     } else if (e.nativeEvent.submitter.name === 'generateImage') {
-      await handleGenerateImage(newMsg);
+      await handleGenerateImage(newMsg , id);
     }
 
 
@@ -116,7 +118,7 @@ const ChatView = () => {
   * @param {string} prompt - The text of the new message.
  
   */
-  const handleSubmit = async (prompt) => {
+  const handleSubmit = async (prompt , id) => {
 
     const formData = new FormData();
     formData.append('file', file, fileName);
@@ -131,6 +133,9 @@ const ChatView = () => {
     };
 
     try {
+
+      const aiMessageId = id + 1;
+      updateMessage("", true, aiMessageId, false);
       const response = await fetch(`https://research-project-h4fb.onrender.com/get_prediction_and_QA?email=${userDetails.email}&query=${encodeURIComponent(prompt)}`, options);
 
       if (!response.ok) {
@@ -147,7 +152,7 @@ const ChatView = () => {
             try {
               const data = JSON.parse(chunks);
               const { id, result } = data;
-              updateMessage(result, true, id, false);
+              updateMessage(result, true, aiMessageId, false);
             } catch (e) {
               console.error('Error parsing final JSON chunk:', e);
             }
@@ -166,7 +171,7 @@ const ChatView = () => {
           try {
             const data = JSON.parse(jsonString);
             const { id, result } = data;
-            updateMessage(result, true, id);
+            updateMessage(result, true, aiMessageId,false);
           } catch (e) {
             console.error('Error parsing JSON:', e);
           }
@@ -183,8 +188,8 @@ const ChatView = () => {
     }
   };
 
-  const handleGenerateImage = async () => {
-    const prompt = formValue.trim();
+  const handleGenerateImage = async (prompt, id) => {
+    // const prompt = formValue.trim();
 
     if (!file) {
       alert('Please select a file first!');
@@ -204,6 +209,8 @@ const ChatView = () => {
     };
 
     try {
+      const aiMessageId = id + 1;
+      updateMessage("", true, aiMessageId, true);
       const response = await fetch(`https://arafath10-research-imagegen-api.hf.space/get_image_for_text?email=${userDetails.email}&query=${encodeURIComponent(prompt)}`, options);
 
       if (!response.ok) {
@@ -214,15 +221,13 @@ const ChatView = () => {
       const base64Image = data.image;
 
       console.log("image URL", base64Image);
-      console.log("id", data.id);
 
-      const id = Date.now() + Math.floor(Math.random() * 1000000);
       const imageMarkdown = `![Generated Image](data:image/jpeg;base64,${base64Image})`;
 
       // Debug: Log the markdown string
       console.log('Image Markdown:', imageMarkdown);
 
-      updateMessage(imageMarkdown, true, id, true);
+      updateMessage(imageMarkdown, true, aiMessageId, true);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -286,24 +291,24 @@ const ChatView = () => {
             onChange={handleChange}
           />
 
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Language</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={language}
-                label="Language"
-                onChange={handleLangageChange}
-              >
-                <MenuItem value={"English"}>English</MenuItem>
-                <MenuItem value={"Tamil"}>Tamil</MenuItem>
-                <MenuItem value={"Sinhala"}>Sinhala</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <div className="flex items-center">
 
+          <div className="flex items-center">
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Language</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={language}
+                  label="Language"
+                  onChange={handleLangageChange}
+                >
+                  <MenuItem value={"English"}>English</MenuItem>
+                  <MenuItem value={"Tamil"}>Tamil</MenuItem>
+                  <MenuItem value={"Sinhala"}>Sinhala</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
             {/* Send button */}
             <Tooltip title="Text Generator" arrow>
               <button

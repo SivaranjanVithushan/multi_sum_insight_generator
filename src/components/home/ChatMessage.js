@@ -27,6 +27,7 @@ const ChatMessage = (props) => {
   return (
     <div key={id} className={`${ai && 'bg-sky-100'} flex-row-reverse message px-10`}>
       <div className="message__wrapper">
+
         {img && imageSrc ? (
           <img src={imageSrc} className="generated-image" alt="Generated content" />
         ) : (
@@ -52,7 +53,8 @@ const ChatMessage = (props) => {
           </ReactMarkdown>
         )}
 
-        <div className="text-left text-slate-600 text-xs message__createdAt">{moment(createdAt).calendar() }</div>
+        <div className="text-left text-slate-600 text-xs message__createdAt">{moment(createdAt).calendar()}</div>
+
       </div>
 
       <div className="message__pic">
