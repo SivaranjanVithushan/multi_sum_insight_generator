@@ -22,7 +22,7 @@ const ChatView = () => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
   const [userDetails, setUserDetails] = useState(null);
-  const [language, setLanguage] = useState('');
+  const [language, setLanguage] = useState('English');
 
 
   useEffect(() => {
@@ -65,14 +65,14 @@ const ChatView = () => {
    * @param {number} [id] - The ID of the new message.
    * @param {boolean} [img] - Whether the message is an image.
    */
-  const updateMessage = (newValue, ai, id, img ) => {
+  const updateMessage = (newValue, ai, id, img) => {
     const newMsg = {
       id: id,
       createdAt: Date.now(),
       text: newValue,
       ai: ai,
       img: img,
-     
+
     };
 
     addMessage(newMsg);
@@ -106,7 +106,7 @@ const ChatView = () => {
     if (e.nativeEvent.submitter.name === 'sendText') {
       await handleSubmit(newMsg, id);
     } else if (e.nativeEvent.submitter.name === 'generateImage') {
-      await handleGenerateImage(newMsg , id);
+      await handleGenerateImage(newMsg, id);
     }
 
 
@@ -118,7 +118,7 @@ const ChatView = () => {
   * @param {string} prompt - The text of the new message.
  
   */
-  const handleSubmit = async (prompt , id) => {
+  const handleSubmit = async (prompt, id) => {
 
     const formData = new FormData();
     formData.append('file', file, fileName);
@@ -145,6 +145,7 @@ const ChatView = () => {
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let chunks = '';
+      let fullText = '';
 
       const processChunks = async ({ done, value }) => {
         if (done) {
@@ -152,7 +153,29 @@ const ChatView = () => {
             try {
               const data = JSON.parse(chunks);
               const { id, result } = data;
+              fullText += result;
               updateMessage(result, true, aiMessageId, false);
+
+              if (language !== "English") {
+                try {
+                  const options = {
+                    method: 'POST',
+                    headers: {
+                      'accept': 'application/json',
+                      'X-API-Key': 'your_api_key_here' // Replace with your actual API key
+                    }
+                  };
+
+                  const response = await fetch(` https://arafath10-research-imagegen-api.hf.space/translator?sentence=${fullText}&lang=${language}`, options).then(
+                    (response) => response.json().then(data => updateMessage("\n\n"+data, true, aiMessageId, false) )).catch((error) => console.log(error));
+
+
+                } catch (error) {
+                  console.error('Error:', error);
+                }
+
+              }
+
             } catch (e) {
               console.error('Error parsing final JSON chunk:', e);
             }
@@ -171,7 +194,8 @@ const ChatView = () => {
           try {
             const data = JSON.parse(jsonString);
             const { id, result } = data;
-            updateMessage(result, true, aiMessageId,false);
+            fullText += result;
+            updateMessage(result, true, aiMessageId, false);
           } catch (e) {
             console.error('Error parsing JSON:', e);
           }
