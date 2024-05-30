@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from "react";  
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../firebase-config';  // Adjust the import path as necessary
+import { auth } from '../../firebase-config'; 
 import hide from '../../assets/icons/hide.png';
 import show from '../../assets/icons/view.png';
 

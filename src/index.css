@@ -173,7 +173,7 @@ code {
   }
 
   .message__markdown {
-    @apply text-sm text-slate-700 whitespace-pre-wrap dark:text-slate-200;
+    @apply text-sm text-slate-700  dark:text-slate-200;
     font-weight: 400;
 
   }
