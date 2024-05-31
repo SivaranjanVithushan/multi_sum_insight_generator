@@ -2,7 +2,6 @@ import logo from '../assets/logo.png'
 import image from '../assets/imgd.png'
 import { useNavigate } from 'react-router-dom';
 
-
 const GetStarted = () => {
   const navigate = useNavigate();
 
@@ -31,14 +30,12 @@ const GetStarted = () => {
           <div className="self-stretch mt-16 max-md:max-w-full max-md:mt-10">
             <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
               <div className="flex grow flex-col justify-center items-stretch  px-px py-3 max-md:max-w-full max-md:mt-10">
-                {/* <div className="text-fuchsia-800 text-center text-4xl font-bold leading-[57px] tracking-wide max-w-[564px] justify-center items-center pt-70 pb-14 px-10 max-md:max-w-full max-md:pt-10 max-md:px-5"> */}
                 <img
                 className='logo'
                 src={image}
                 alt=""
                 style={{ width: '600px', }}  // Adjust the width and height as needed
               />
-                {/* </div> */}
               </div>
               <div className="flex flex-col items-stretch w-[62%] ml-5 max-md:w-full max-md:ml-0">
                 <div className="flex flex-col items-stretch max-md:max-w-full max-md:mt-10">

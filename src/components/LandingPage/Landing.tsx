@@ -3,12 +3,6 @@ import { useDropzone } from 'react-dropzone';
 
 const Landing = () => {
 
-  // const navigate = useNavigate();
-
-  // const handleClick = () => {
-  //   navigate('/register');
-  // };
-
   const onDrop = (acceptedFiles: any) => {
     // Handle the dropped files here
     console.log('Dropped files:', acceptedFiles);

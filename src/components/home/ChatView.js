@@ -116,13 +116,12 @@ const ChatView = () => {
   * Adds a new message to the chat.
   *
   * @param {string} prompt - The text of the new message.
+  * @param {number} id - The ID of the new message.
  
   */
   const handleSubmit = async (prompt, id) => {
-
     const formData = new FormData();
     formData.append('file', file, fileName);
-
     const options = {
       method: 'POST',
       headers: {
@@ -131,28 +130,25 @@ const ChatView = () => {
       },
       body: formData
     };
-
     try {
-
       const aiMessageId = id + 1;
       updateMessage("", true, aiMessageId, false);
+      console.log("userDetails", userDetails);
       const response = await fetch(`https://research-project-h4fb.onrender.com/get_prediction_and_QA?email=${userDetails.email}&query=${encodeURIComponent(prompt)}`, options);
-
+      console.log(response);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let chunks = '';
       let fullText = '';
-
       const processChunks = async ({ done, value }) => {
         if (done) {
           if (chunks) {
             try {
               const data = JSON.parse(chunks);
-              const { id, result } = data;
+              const { result } = data;
               fullText += result;
               updateMessage(result, true, aiMessageId, false);
 
@@ -165,17 +161,12 @@ const ChatView = () => {
                       'X-API-Key': 'your_api_key_here' // Replace with your actual API key
                     }
                   };
-
-                  const response = await fetch(` https://arafath10-research-imagegen-api.hf.space/translator?sentence=${fullText}&lang=${language}`, options).then(
-                    (response) => response.json().then(data => updateMessage("\n\n"+data, true, aiMessageId, false) )).catch((error) => console.log(error));
-
-
+                  await fetch(` https://arafath10-research-imagegen-api.hf.space/translator?sentence=${fullText}&lang=${language}`, options).then(
+                    (response) => response.json().then(data => updateMessage("\n\n" + data, true, aiMessageId, false))).catch((error) => console.log(error));
                 } catch (error) {
                   console.error('Error:', error);
                 }
-
               }
-
             } catch (e) {
               console.error('Error parsing final JSON chunk:', e);
             }
@@ -183,29 +174,24 @@ const ChatView = () => {
           console.log('Stream completed');
           return;
         }
-
         chunks += decoder.decode(value, { stream: true });
-
         let boundary = chunks.indexOf('}{');
         while (boundary !== -1) {
           const jsonString = chunks.slice(0, boundary + 1);
           chunks = chunks.slice(boundary + 1);
-
           try {
             const data = JSON.parse(jsonString);
-            const { id, result } = data;
+            const { result } = data;
             fullText += result;
+            console.log("fullText", fullText);
             updateMessage(result, true, aiMessageId, false);
           } catch (e) {
             console.error('Error parsing JSON:', e);
           }
-
           boundary = chunks.indexOf('}{');
         }
-
         reader.read().then(processChunks);
       };
-
       reader.read().then(processChunks);
     } catch (error) {
       console.error('Error:', error);
@@ -236,7 +222,6 @@ const ChatView = () => {
       const aiMessageId = id + 1;
       updateMessage("", true, aiMessageId, true);
       const response = await fetch(`https://arafath10-research-imagegen-api.hf.space/get_image_for_text?email=${userDetails.email}&query=${encodeURIComponent(prompt)}`, options);
-
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -334,7 +319,7 @@ const ChatView = () => {
               </FormControl>
             </Box>
             {/* Send button */}
-            <Tooltip title="Text Generator" arrow>
+            <Tooltip title="Insight Generate" arrow>
               <button
                 type="submit"
                 name="sendText"
@@ -345,7 +330,7 @@ const ChatView = () => {
               </button>
             </Tooltip>
             {/* Generate image button */}
-            <Tooltip title="Insight Generate" arrow>
+            <Tooltip title="Graph Generate" arrow>
               <button
                 type="submit"
                 name="generateImage"
