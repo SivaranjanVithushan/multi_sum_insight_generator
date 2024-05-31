@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import reactmarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
@@ -31,7 +31,7 @@ const ChatMessage = (props) => {
         {img && imageSrc ? (
           <img src={imageSrc} className="generated-image" alt="Generated content" />
         ) : (
-          <ReactMarkdown
+          <reactmarkdown
             className={'message__markdown text-left'}
             remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
             components={{
@@ -50,7 +50,7 @@ const ChatMessage = (props) => {
             }}
           >
             {text}
-          </ReactMarkdown>
+          </reactmarkdown>
         )}
 
         <div className="text-left text-slate-600 text-xs message__createdAt">{moment(createdAt).calendar()}</div>
