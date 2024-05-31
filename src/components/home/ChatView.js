@@ -148,7 +148,7 @@ const ChatView = () => {
           if (chunks) {
             try {
               const data = JSON.parse(chunks);
-              const { result } = data;
+              const { id, result } = data;
               fullText += result;
               updateMessage(result, true, aiMessageId, false);
 
@@ -181,7 +181,7 @@ const ChatView = () => {
           chunks = chunks.slice(boundary + 1);
           try {
             const data = JSON.parse(jsonString);
-            const { result } = data;
+            const { id, result } = data;
             fullText += result;
             console.log("fullText", fullText);
             updateMessage(result, true, aiMessageId, false);

@@ -62,6 +62,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/landing" element={<Landing />} />
               <Route path="/" element={<Navigate to="/home" />} />
+              <Route path="*" element={<Navigate to="/home" />} />
             </Routes>
           </div>
         </div>
@@ -71,6 +72,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/register" element={<Register onRegister={handleLogin} />}/>
+          <Route path="*" element={<Navigate to="/" />} />
           {/* <Route path="prompt" element={<Home />} /> */}
         </Routes>
       )}
