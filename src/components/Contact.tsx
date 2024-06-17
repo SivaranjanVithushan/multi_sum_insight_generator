@@ -72,6 +72,7 @@ function ContactForm() {
                 value={formData.name}
                 onChange={handleChange}
                 autoComplete="given-name"
+                required
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -150,7 +151,7 @@ function ContactForm() {
           loading="lazy"
           src={contactImage}
           className="aspect-[0.89] object-cover object-center w-full shrink-0 box-border min-h-[200px] min-w-[20px] overflow-hidden grow-0 max-w-[400px] h-auto self-stretch ml-2 max-sm:ml-px"
-          alt=""
+          alt="Contact Us"
         />
         <div className="bg-white self-stretch flex flex-col justify-center items-stretch pb-3 px-px max-md:max-w-full" />
       </div>
