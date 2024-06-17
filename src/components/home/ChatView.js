@@ -94,15 +94,12 @@ const ChatView = () => {
     }
 
     const cleanPrompt = formValue.trim();
-
     const newMsg = cleanPrompt;
-
-    //genarate id
     const id = Date.now() + Math.floor(Math.random() * 1000000);
 
     setFormValue('');
     updateMessage(newMsg, false, id);
-    // Determine which button was clicked
+
     if (e.nativeEvent.submitter.name === 'sendText') {
       await handleSubmit(newMsg, id);
     } else if (e.nativeEvent.submitter.name === 'generateImage') {
@@ -134,6 +131,7 @@ const ChatView = () => {
       const aiMessageId = id + 1;
       updateMessage("", true, aiMessageId, false);
       console.log("userDetails", userDetails);
+
       const response = await fetch(`https://research-project-h4fb.onrender.com/get_prediction_and_QA?email=${userDetails.email}&query=${encodeURIComponent(prompt)}`, options);
       console.log(response);
       if (!response.ok) {
@@ -285,7 +283,6 @@ const ChatView = () => {
         {messages.map((message, index) => (
           <ChatMessage key={index} message={{ ...message }} />
         ))}
-
         <span ref={messagesEndRef}></span>
       </main>
       <form className="form" onSubmit={sendMessage}>
@@ -296,11 +293,8 @@ const ChatView = () => {
             placeholder="Type a prompt here..."
             rows={1}
             value={formValue}
-            // onKeyDown={handleKeyDown}
             onChange={handleChange}
           />
-
-
           <div className="flex items-center">
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
@@ -320,6 +314,7 @@ const ChatView = () => {
             </Box>
             {/* Send button */}
             <Tooltip title="Insight Generate" arrow>
+              <span>
               <button
                 type="submit"
                 name="sendText"
@@ -328,9 +323,11 @@ const ChatView = () => {
                 data-tip="Send Message">
                 <MdSend size={30} />
               </button>
+              </span>
             </Tooltip>
             {/* Generate image button */}
             <Tooltip title="Graph Generate" arrow>
+              <span>
               <button
                 type="submit"
                 name="generateImage"
@@ -341,6 +338,7 @@ const ChatView = () => {
               >
                 <MdImage size={20} />
               </button>
+              </span>
             </Tooltip>
 
 
