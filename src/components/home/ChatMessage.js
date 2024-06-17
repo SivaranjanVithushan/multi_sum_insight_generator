@@ -52,15 +52,18 @@ const ChatMessage = (props) => {
             {text}
           </ReactMarkdown>
         )}
-
-        <div className="text-left text-slate-600 text-xs message__createdAt">{moment(createdAt).calendar()}</div>
-
+        <div className="text-left text-slate-600 text-xs message__createdAt">
+          {moment(createdAt).calendar()}
+        </div>
       </div>
-
       <div className="message__pic">
         <div className="avatar">
           <div className="border rounded-full">
-            {ai ? <img width="30" className="border rounded-full" src={logo} alt="Logo" /> : <img className="border rounded-full" src={person} alt="profile pic" />}
+            {ai ? (
+              <img width="30" className="border rounded-full" src={logo} alt="Logo" />
+            ) : (
+              <img className="border rounded-full" src={person} alt="profile pic" />
+            )}
           </div>
         </div>
       </div>
