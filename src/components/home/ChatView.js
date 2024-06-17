@@ -243,13 +243,13 @@ const ChatView = () => {
   };
 
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      // 👇 Get input value
-      sendMessage(e);
-      inputRef.current.style.height = 'auto';
-    }
-  };
+  // const handleKeyDown = (e) => {
+  //   if (e.key === 'Enter' && !e.shiftKey) {
+  //     // 👇 Get input value
+  //     sendMessage(e);
+  //     inputRef.current.style.height = 'auto';
+  //   }
+  // };
 
   const handleChange = (event) => {
     setFormValue(event.target.value);
@@ -296,7 +296,7 @@ const ChatView = () => {
             placeholder="Type a prompt here..."
             rows={1}
             value={formValue}
-            onKeyDown={handleKeyDown}
+            // onKeyDown={handleKeyDown}
             onChange={handleChange}
           />
 
