@@ -1,6 +1,5 @@
-
-import React, { useState ,useEffect} from "react";
-import { Navigate, Route, Routes,useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./Styles/App.css";
 import Contact from "./components/Contact";
 import GetStarted from "./components/GetStarted";
@@ -14,10 +13,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import { auth } from "./firebase-config"; 
 
-
-
 function App() {
-  // Use state to manage login status
   const [isLogged, setIsLogged] = useState(false);
   const navigate = useNavigate();
 
@@ -45,6 +41,7 @@ function App() {
   const handleLogin = () => {
     setIsLogged(true);
   };
+
   return (
     <>
       {isLogged ? (
@@ -53,10 +50,9 @@ function App() {
           <div className="body-contain">
             <Routes>
               <Route path="/home" element={
-                // <Home/>
                 <ChatContextProvider>
-                <ChatView />
-              </ChatContextProvider>
+                  <ChatView />
+                </ChatContextProvider>
               } />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
@@ -71,9 +67,8 @@ function App() {
           <Route path="/" element={<GetStarted />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
-          <Route path="/register" element={<Register onRegister={handleLogin} />}/>
+          <Route path="/register" element={<Register onRegister={handleLogin} />} />
           <Route path="*" element={<Navigate to="/" />} />
-          {/* <Route path="prompt" element={<Home />} /> */}
         </Routes>
       )}
     </>
