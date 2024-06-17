@@ -18,10 +18,12 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
     const handleRegister = async () => {
+        setLoading(true);
         if (password !== confirmPassword) {
             alert("passwords do not match");
             return;
@@ -38,7 +40,10 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
             onRegister();
             navigate('/home');
         } catch (error) {
+            alert(error);
             console.error("Error registering user", error);
+        }finally {
+            setLoading(false);
         }
     };
 
@@ -135,13 +140,20 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                         className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
-                                    <img
-                                        loading="lazy"
-                                        src={showPassword ? show : hide}
-                                        alt="Icon 2"
-                                        className="w-4 h-4 self-start"
+                                    <button
+                                        type="button"
                                         onClick={togglePasswordVisibility}
-                                    />
+                                        className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full self-start"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                    >
+                                        <img
+                                            loading="lazy"
+                                            src={showPassword ? show : hide}
+                                            alt="Toggle Password Visibility"
+                                            className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full"
+                                        />
+                                    </button>
+
                                 </div>
 
                                 <div className="text-slate-800 text-sm font-medium mt-5 max-md:max-w-full">
@@ -160,19 +172,28 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                         className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                     />
-                                    <img
-                                        loading="lazy"
-                                        src={showConfirmPassword ? show : hide}
-                                        alt="Icon 2"
-                                        className="w-4 h-4 self-start"
+                                    <button
+                                        type="button"
                                         onClick={toggleConfirmPasswordVisibility}
-                                    />
+                                        className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full self-start"
+                                        aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                                    >
+                                        <img
+                                            loading="lazy"
+                                            src={showConfirmPassword ? show : hide}
+                                            alt="Toggle Password Visibility"
+                                            className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full"
+                                        />
+                                    </button>
+
                                 </div>
 
                                 <button
-                                    className="text-white text-center text-sm font-black leading-4 whitespace-nowrap justify-center items-center bg-slate-800 mt-5 px-16 py-3.5 rounded-md max-md:max-w-full max-md:px-5" onClick={handleRegister}
+                                    className="text-white text-center text-sm font-black leading-4 whitespace-nowrap justify-center items-center bg-slate-800 mt-5 px-16 py-3.5 rounded-md max-md:max-w-full max-md:px-5" 
+                                    onClick={handleRegister}
+                                    disabled={loading}
                                 >
-                                    REGISTER
+                                    {loading ? "Registering In..." : "REGISTER"} 
                                 </button>
 
                             </div>
