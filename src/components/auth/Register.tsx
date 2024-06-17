@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from '../../firebase-config';
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -20,12 +20,18 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const nameRef = useRef<HTMLInputElement>(null);
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const confirmPasswordRef = useRef<HTMLInputElement>(null);
+
     const navigate = useNavigate();
 
     const handleRegister = async () => {
         setLoading(true);
         if (password !== confirmPassword) {
-            alert("passwords do not match");
+            alert("Passwords do not match");
+            setLoading(false);
             return;
         }
         try {
@@ -42,7 +48,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
         } catch (error) {
             alert(error);
             console.error("Error registering user", error);
-        }finally {
+        } finally {
             setLoading(false);
         }
     };
@@ -59,6 +65,13 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
         navigate('/login');
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent, nextFieldRef: React.RefObject<HTMLInputElement>) => {
+        if (event.key === 'Enter' && nextFieldRef.current) {
+            nextFieldRef.current.focus();
+        }
+    };
+
+
     return (
         <div className="justify-center items-stretch flex flex-col px-16 py-12 max-md:px-5">
             <div className="ml-11 mr-11 mt-16 mb-11 max-md:max-w-full max-md:mr-2.5 max-md:my-10">
@@ -69,7 +82,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                 <img
                                     className='logo'
                                     src={logo}
-                                    alt=""
+                                    alt="Logo"
                                     style={{ width: '250px', }}  // Adjust the width and height as needed
                                 />
                             </div>
@@ -77,7 +90,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                 Welcome back!
                             </div>
                             <div className="text-white text-center text-xl font-semibold leading-8 tracking-wide self-center max-w-[553px] mt-12 max-md:max-w-full max-md:mt-10">
-                                To Keep  Connected with us, please
+                                To Keep Connected with us, please
                                 login with your personal info
                             </div>
                             <button
@@ -99,10 +112,12 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                     User name
                                 </div>
                                 <input
+                                ref={nameRef}
                                     className="text-gray-400 text-xs font-medium items-stretch rounded border focus:outline-none border-[color:var(--Base-Gray-4,#757575)] bg-white justify-center mt-1.5 px-3 py-3.5 border-solid max-md:max-w-full"
-                                    type="email"
+                                    type="text"
                                     placeholder='Your name'
                                     onChange={(e) => setName(e.target.value)}
+                                    onKeyDown={(e) => handleKeyDown(e, emailRef)}
                                 />
 
                                 <div className="text-slate-800 text-sm font-medium mt-5 max-md:max-w-full">
@@ -112,16 +127,17 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                     <img
                                         loading="lazy"
                                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/6634dbd1bab6fda584ac39ac02b561d06427f9ed95f7e7452fc7f0024e02467e?"
-                                        alt="Icon 1"
+                                        alt="Email Icon"
                                         className="w-4 h-4 self-start"
                                     />
                                     <input
+                                        ref={emailRef}
                                         type="email"
                                         placeholder="Your email"
                                         className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
                                         onChange={(e) => setEmail(e.target.value)}
+                                        onKeyDown={(e) => handleKeyDown(e, passwordRef)}
                                     />
-
                                 </div>
 
                                 <div className="text-slate-800 text-sm font-medium mt-5 max-md:max-w-full">
@@ -131,14 +147,16 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                     <img
                                         loading="lazy"
                                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/ad36129f731cccccbdff4827bac7c729a9c18e7c25a9278b9a45f4162ed5d859?"
-                                        alt="Icon 1"
+                                        alt="Password Icon"
                                         className="w-4 h-4 self-start"
                                     />
                                     <input
+                                        ref={passwordRef}
                                         type={showPassword ? 'text' : 'password'}
                                         placeholder="Your password"
                                         className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
                                         onChange={(e) => setPassword(e.target.value)}
+                                        onKeyDown={(e) => handleKeyDown(e, confirmPasswordRef)}
                                     />
                                     <button
                                         type="button"
@@ -153,7 +171,6 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                             className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full"
                                         />
                                     </button>
-
                                 </div>
 
                                 <div className="text-slate-800 text-sm font-medium mt-5 max-md:max-w-full">
@@ -163,14 +180,16 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                     <img
                                         loading="lazy"
                                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/e7aa66f28f42ceda063378a5d8ac611fde5639670f9a8f22b82db1dcb24c44da?"
-                                        alt="Icon 1"
+                                        alt="Confirm Password Icon"
                                         className="w-4 h-4 self-start"
                                     />
                                     <input
+                                        ref={confirmPasswordRef}
                                         type={showConfirmPassword ? 'text' : 'password'}
                                         placeholder="Re-enter your password"
                                         className="text-gray-400 text-xs font-medium self-start w-full border-none focus:outline-none"
                                         onChange={(e) => setConfirmPassword(e.target.value)}
+                                        onKeyDown={(e) => handleKeyDown(e, confirmPasswordRef)}
                                     />
                                     <button
                                         type="button"
@@ -185,7 +204,6 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                             className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full"
                                         />
                                     </button>
-
                                 </div>
 
                                 <button
@@ -193,18 +211,15 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
                                     onClick={handleRegister}
                                     disabled={loading}
                                 >
-                                    {loading ? "Registering In..." : "REGISTER"} 
+                                    {loading ? "Registering..." : "REGISTER"} 
                                 </button>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Register
-
-
+export default Register;

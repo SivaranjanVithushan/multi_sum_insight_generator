@@ -1,9 +1,9 @@
-import * as React from "react";  
-import { useState } from "react";
+import * as React from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../firebase-config'; 
+import { auth } from '../../firebase-config';
 import hide from '../../assets/icons/hide.png';
 import show from '../../assets/icons/view.png';
 
@@ -11,13 +11,16 @@ interface LoginProps {
   onLogin: () => void;
 }
 
-const Login : React.FC<LoginProps> = ({ onLogin }) => {
+const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false); // Loading state
+
+  const username = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleLogin = async () => {
     setLoading(true); // Set loading to true when login process starts
@@ -39,6 +42,12 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent, nextFieldRef: React.RefObject<HTMLInputElement>) => {
+    if (event.key === 'Enter' && nextFieldRef.current) {
+      nextFieldRef.current.focus();
+    }
   };
 
   return (
@@ -87,11 +96,13 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                     className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full"
                   />
                   <input
+                    ref={username}
                     type="email"
                     placeholder="Your email"
                     className="text-gray-400 text-xs font-medium w-full border-none focus:outline-none"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(e, passwordRef)}
                   />
                 </div>
                 <div className="text-slate-800 text-sm font-medium self-stretch mt-5 max-md:max-w-full">
@@ -105,13 +116,15 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                     className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full self-start"
                   />
                   <input
+                    ref={passwordRef}
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Your password"
                     className="text-gray-400 text-xs font-medium w-full border-none focus:outline-none"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+
                   />
-                   <button
+                  <button
                     type="button"
                     onClick={togglePasswordVisibility}
                     className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full self-start"
@@ -132,7 +145,7 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                 >
                   {loading ? "Signing In..." : "SIGN IN"} {/* Change button text based on loading state */}
                 </button>
-              
+
               </div>
             </div>
           </div>
