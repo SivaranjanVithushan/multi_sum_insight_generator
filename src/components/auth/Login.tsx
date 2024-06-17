@@ -7,7 +7,6 @@ import { auth } from '../../firebase-config';
 import hide from '../../assets/icons/hide.png';
 import show from '../../assets/icons/view.png';
 
-
 interface LoginProps {
   onLogin: () => void;
 }
@@ -18,8 +17,10 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleLogin = async () => {
+    setLoading(true); // Set loading to true when login process starts
     try {
       await signInWithEmailAndPassword(auth, email, password);
       onLogin();
@@ -27,13 +28,14 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
     } catch (error) {
       console.error("Error signing in", error);
       alert("Error signing in. Please check your credentials and try again.");
+    } finally {
+      setLoading(false); // Reset loading state when login process completes
     }
   }
 
   const handleClick = () => {
     navigate('/register');
   };
-
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -66,7 +68,6 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
               >
                 REGISTER
               </button>
-
             </div>
           </div>
           <div className="flex flex-col items-stretch w-[49%]  max-md:w-full max-md:ml-0">
@@ -84,23 +85,18 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b8c0d4b500438a8efe37648854b703cef87421071bda232efb4c424f647ae5d?"
                     alt="Icon"
                     className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full"
-
                   />
-
                   <input
                     type="email"
                     placeholder="Your email"
                     className="text-gray-400 text-xs font-medium w-full border-none focus:outline-none"
                     value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-
                 </div>
-
                 <div className="text-slate-800 text-sm font-medium self-stretch mt-5 max-md:max-w-full">
                   Password
                 </div>
-
                 <div className="items-stretch self-stretch rounded border border-[color:var(--Base-Gray-4,#757575)] bg-white flex gap-2.5 mt-1.5 px-3 py-3.5 border-solid max-md:max-w-full max-md:flex-wrap">
                   <img
                     loading="lazy"
@@ -109,38 +105,40 @@ const Login : React.FC<LoginProps> = ({ onLogin }) => {
                     className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full self-start"
                   />
                   <input
-                   type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? 'text' : 'password'}
                     placeholder="Your password"
                     className="text-gray-400 text-xs font-medium w-full border-none focus:outline-none"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <img
-                    loading="lazy"
-                    src={showPassword ? show:hide}
-                    alt="Icon 2"
-                    className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full self-start"
+                   <button
+                    type="button"
                     onClick={togglePasswordVisibility}
-                  />
+                    className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full self-start"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    <img
+                      loading="lazy"
+                      src={showPassword ? show : hide}
+                      alt="Toggle Password Visibility"
+                      className="aspect-square object-contain object-center w-4 overflow-hidden shrink-0 max-w-full"
+                    />
+                  </button>
                 </div>
                 <button
                   onClick={handleLogin}
-                  
                   className="text-white text-center text-sm font-black leading-4 whitespace-nowrap justify-center items-center bg-slate-800 self-stretch mt-5 px-16 py-3.5 rounded-md max-md:max-w-full max-md:px-5"
+                  disabled={loading} // Disable button when loading
                 >
-                  SIGN IN
+                  {loading ? "Signing In..." : "SIGN IN"} {/* Change button text based on loading state */}
                 </button>
-
+              
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-export default Login
-
-
-
-
+export default Login;
